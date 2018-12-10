@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" style="float:right" class="btn btn-default btn-success submit_btn" (click)="goto_home()"><span
+          class="glyphicon glyphicon-home"></span></button>
+      <h4 class="form_heading">Question List</h4>
+      <button class="add_question btn btn-success" (click)="goto_add_question()">Add New Question</button>
+      <!-- display table for listing questions -->
+      <table class="table table-striped list_table" border="1">
+        <thead>
+          <tr>
+            <th width="70%">Question</th>
+            <th>Severity</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let question of questions">
+            <td width="70%">{{question.q_text}}</td>
+            <td>{{question.severity}}</td>
+            <td class="action">
+              <button class="btn btn-success" (click)="edit_question(question._id)"><span class="glyphicon glyphicon-pencil"></span></button>
+              <button class="btn btn-success" (click)="remove_item(question)"><span class="glyphicon glyphicon-trash"></span></button>
+            </td>
+            <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
+                  </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

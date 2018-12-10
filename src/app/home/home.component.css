@@ -1,0 +1,16 @@
+*{padding:0;margin:0}
+ul.navigate_module li{
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+    font-size:20px;
+    font-weight:bold;
+    padding:20px;
+    border:2px solid #ccc;
+    background-color:#000;
+    color:#fff;
+    cursor:pointer;
+   }
+ul.navigate_module{
+    margin-top:50px;
+}

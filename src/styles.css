@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+.wrapper{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width:338px;
+}
+.login-panel{background-color:#e4f0f5;padding:20px; border-radius:10px;}
+.Question-wrapper{margin:5px auto;border: 2px solid #3d7e9a;padding:20px;background-color:#e4f0f5;margin: 100px auto;}
+.invalid-feedback{color:red; font-weight: 550;font-size: 14px;}
+.btn-success {
+    color: #fff;
+    background-color: #3d7e9a;
+    border-color: #83d0f2;
+}
+
+.ngx-pagination li{
+    display: none !important;
+}
+#pagination .pagination-previous, #pagination .pagination-next{
+    display: inline-block !important;
+}
+#pagination .pagination-previous a:hover, #pagination .pagination-next a:hover{
+    text-decoration: none;
+}
+#pagination .pagination-previous a,#pagination .pagination-next a{
+    background-color: #3d7e9a; 
+    color: #fff;
+}
+/* #pagination .pagination-next{
+    margin-left: 500px;
+} */

@@ -1,0 +1,11 @@
+
+.question{font-size:16px;font-weight:bold;margin-bottom: 55px;}
+.answer{font-size:15px;font-weight:bold; margin-bottom:50px}
+.Question_set{text-align:center;}
+.timer{position:relative}
+.timer span{ font-weight:bold;font-size:18px;float:right; padding:20px;top:10px;border: 1px solid #45ad45;}
+.save_submit{margin-top:70px}
+ul.option_list{padding-left:10px;min-height: 50px !important;}
+.quiz{
+    margin-top: 50px;
+}

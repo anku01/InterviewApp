@@ -1,0 +1,74 @@
+<div class="container Question-wrapper">
+  <h3>{{id ? "Edit " : "Add "}} Question</h3>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class=" form-group">
+      <label for="name">Type of Question:</label>
+      <div class=selection_type>
+        <label class="radio-inline">
+          <input type="radio" [(ngModel)]="questionFormData.q_type" name="q_type" value="single">Single Select
+        </label>
+        <label class="radio-inline">
+          <input type="radio" [(ngModel)]="questionFormData.q_type" name="q_type" value="multi">Multi Select
+        </label>
+        <!-- <label class="radio-inline">
+          <input type="radio" [(ngModel)]="questionFormData.q_type" name="q_type" value="boolean">True/False
+        </label> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form-group">
+        <label for="name">Question:</label><br>
+        <textarea rows="4" class="form-control" name="q_text" [(ngModel)]="questionFormData.q_text" cols="100"
+          placeholder="Type your Question">
+            </textarea>
+        <!-- <div class="invalid-feedback" *ngIf="submitted && formControls.q_text.errors">This Field is required</div> -->
+
+      </div>
+    </div>
+    <div class="row">
+
+      <div class=" col-sm-4 form-group">
+        <label for="name">Severity:</label><br>
+        <select class="form-control" name="severity" [(ngModel)]='questionFormData.severity'>
+          <option value="1">1 </option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+
+        </select>
+
+        <!-- <div class="invalid-feedback" *ngIf="submitted && selected_sev">This Field is required</div> -->
+      </div>
+      <div class=" col-sm-4 form-group">
+        <label for="name">Technology:</label>
+        <select class="form-control" name="technology" [(ngModel)]='questionFormData.technology'>
+          <option value="FrontEnd">FrontEnd </option>
+          <option value="Backend">Backend</option>
+          <option value="Embeded">Embeded</option>
+
+        </select>
+
+        <!-- <div class="invalid-feedback" *ngIf="submitted && selected_tech">This Field is required{{selected_tech}}</div> -->
+
+      </div>
+    </div>
+    <div class="row" *ngFor="let option of questionFormData.options; let i= index">
+      <div class="col-sm-8 form-group">
+        <label for="name">Option {{i+1}}:</label>
+        <input type="text" name="{{i}}" [(ngModel)]="option.value" class="form-control">        
+      </div>
+      <div class="col-sm-4">
+        <label *ngIf="i===0" for="name">Correct Option(s)</label>
+        <input type="checkbox" name="isCorrecet{{i}}" [(ngModel)]="option.isCorrect" class="correct-check">
+      </div>
+    </div>
+    <div class="row">
+      <!-- <button title="Remove Option" (click)="removeInputField()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-minus"></span></button> -->
+      <button title="Add Option" (click)="addInputField()" type="button" class="btn btn-success action-option"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+    <div class="row btn-center">
+      <button type="submit" class="btn btn-success">{{id ? "Update " : "Save "}} Question</button>
+    </div>
+  </form>
+</div>

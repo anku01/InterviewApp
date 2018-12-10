@@ -1,0 +1,13 @@
+.btn-center{text-align:center}
+.checked {
+    color: orange;
+}
+.correct-check{
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+.correct-check:first-child{
+    margin-top: 30px;
+}
+.action-option{ margin-left:15px;}
