@@ -28,7 +28,12 @@ export class QuizComponent implements OnInit {
     let noOfQuizs = parseInt(sessionStorage.getItem("TestDuration"));
     // let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
     this.http.post('http://localhost:4000/quizRoute/getExamQuestions', {size: noOfQuizs} ).subscribe((resp:any) => {
-      if(resp && resp.quizs)
+      if(resp && resp.quizs){
+        resp.quizs.forEach(q => {
+          q.answer = "";
+          q.options = this.convertOtionsToJson(q.options);
+        });
+      }
         this.questions = resp.quizs;
       if(this.questions.length === 15)
         this.countDownDate = (new Date().getTime()) + (1000*60*30)
@@ -50,8 +55,6 @@ export class QuizComponent implements OnInit {
           this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
           this.seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          console.log( this.minutes+ "minutes ", this.seconds+"second(s)");
-
           // If the count down is finished, write some text 
           if (distance < 0) {
             clearInterval(interval);
@@ -71,7 +74,18 @@ export class QuizComponent implements OnInit {
           return $2; 
       } 
     });
-    return JSON.parse(option);
+    option =  JSON.parse(option);
+    option.userAnswer = "";
+    return option;
+  }
+
+  getAnswer(q, questionNo, optionNo ){
+    function findQuestions(qz){
+      return qz._id === q._id;
+    }
+    questionNo = this.questions.findIndex(findQuestions)
+    this.questions[questionNo].answer = optionNo;
+    sessionStorage.setItem("exam", JSON.stringify(this.questions));
   }
 
 }

@@ -7,8 +7,8 @@
       </div>
       
       <div class="answer row">
-        <ul class="col-md-6 option_list" *ngFor="let option of convertOtionsToJson(q.options);">
-          <input type="radio" [checked]="option.isCorrect" name="{{option[i]}}"> {{option.value}}<br>
+        <ul class="col-md-6 option_list" *ngFor="let option of q.options; let idx = index;">
+          <input type="radio" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" (click)="getAnswer(q, i, idx)"> {{option.value}}<br>
         </ul>
       </div>
     </div>
