@@ -22,19 +22,26 @@ export class QuizComponent implements OnInit {
 
   }
   goto_quiz_result() {
+    let examData = {
+      exam: JSON.parse(sessionStorage.getItem("exam")),
+      candidateData: JSON.parse(sessionStorage.getItem("candidateData"))
+    };
+    this.http.post('http://localhost:4000/quizRoute/submitExam', examData ).subscribe((resp:any) => {
+  })
     this.router.navigate(['./quiz-result']);
   }
   ngOnInit() {
     let noOfQuizs = parseInt(sessionStorage.getItem("TestDuration"));
-    // let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/getExamQuestions', {size: noOfQuizs} ).subscribe((resp:any) => {
+    let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
+    this.http.post('http://localhost:4000/quizRoute/getExamQuestions', {size: noOfQuizs, candidateID: candidateID} ).subscribe((resp:any) => {
       if(resp && resp.quizs){
         resp.quizs.forEach(q => {
           q.answer = "";
           q.options = this.convertOtionsToJson(q.options);
         });
-      }
         this.questions = resp.quizs;
+      }
+      
       if(this.questions.length === 15)
         this.countDownDate = (new Date().getTime()) + (1000*60*30)
       if(this.questions.length === 25)
@@ -83,7 +90,7 @@ export class QuizComponent implements OnInit {
     function findQuestions(qz){
       return qz._id === q._id;
     }
-    questionNo = this.questions.findIndex(findQuestions)
+    questionNo = this.questions.findIndex(findQuestions);
     this.questions[questionNo].answer = optionNo;
     sessionStorage.setItem("exam", JSON.stringify(this.questions));
   }
