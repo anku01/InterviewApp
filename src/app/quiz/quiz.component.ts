@@ -33,7 +33,7 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     let noOfQuizs = parseInt(sessionStorage.getItem("TestDuration"));
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/getExamQuestions', {size: noOfQuizs, candidateID: candidateID} ).subscribe((resp:any) => {
+    this.http.post('http://localhost:4000/quizRoute/startExam', {size: noOfQuizs, candidateID: candidateID} ).subscribe((resp:any) => {
       if(resp && resp.quizs){
         resp.quizs.forEach(q => {
           q.answer = "";
