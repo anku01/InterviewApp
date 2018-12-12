@@ -1,7 +1,7 @@
 <div class="container-fluid timer"> <span class="alert alert-success"> {{minutes}}:{{seconds}}</span></div>
 <form>
   <div class="container Question-wrapper">
-    <div class="quiz" *ngFor="let q of questions |  paginate: { itemsPerPage: 1, currentPage: p }; let  i = index;">
+    <div class="quiz" *ngFor="let q of questions; let  i = index;">
       <div class="question">
         <P><span>{{i+1}}) </span>{{q.q_text}} </P>
       </div>
@@ -13,9 +13,9 @@
       </div>
     </div>
     <div class="prev_next" id="pagination">
-      <!-- <button class="prev btn-warning pull-left">Prev</button>
-      <button class="Next btn-warning pull-right">Next</button> -->
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <button (click)="getNextQuestion()" class="prev btn-warning">Prev</button>
+      <button (click)="getPrevQuestion()" class="Next btn-warning">Next</button>
+      <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
     </div>
     <div class="save_submit" align="center">
     <button type="submit" class="btn btn-success pull-right " (click)="goto_quiz_result()">SUBMIT TEST</button>
