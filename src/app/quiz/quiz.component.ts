@@ -60,8 +60,8 @@ export class QuizComponent implements OnInit {
 
   getQuestion() {
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/getExamQuestions', { size: this.noOfQuizs, candidateID: candidateID }).subscribe((resp: any) => {
-      if (resp && resp.quizs) {
+    this.http.post('http://localhost:4000/quizRoute/startExam', {size: this.noOfQuizs, candidateID: candidateID} ).subscribe((resp:any) => {
+      if(resp && resp.quizs){
         resp.quizs.forEach(q => {
           q.answer = "";
           q.options = this.convertOtionsToJson(q.options);
