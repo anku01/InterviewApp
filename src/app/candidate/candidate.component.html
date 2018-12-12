@@ -16,10 +16,7 @@
     </div>
     <div class="form-group">
       <label for="contact">Contact Number:</label>
-      <input type="number" name="contact" [(ngModel)]="candidateform.contact" class="form-control" #contact="ngModel" [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }" required />
-      <div *ngIf="f.submitted && contact.invalid" class="invalid-feedback">
-        <div *ngIf="contact.errors.required">Mobile Number is required</div>
-      </div>
+      <input type="number" name="contact" [(ngModel)]="candidateform.contact" class="form-control" />
       <!-- <div class="invalid-feedback" *ngIf="submitted && formControls.contact.errors">This Field is required</div> -->
     </div>
     <button type="submit" class="btn btn-success pull-right">Submit</button>
