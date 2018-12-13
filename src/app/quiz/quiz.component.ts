@@ -35,7 +35,7 @@ export class QuizComponent implements OnInit {
     this.router.navigate(['./quiz-result']);
   }
   ngOnInit() {
-    this.getQuestion();
+    this.startExam();
     // Update the count down every 1 second
     var interval = setInterval(() => {
 
@@ -58,7 +58,7 @@ export class QuizComponent implements OnInit {
     }, 1000);
   }
 
-  getQuestion() {
+  startExam() {
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
     this.http.post('http://localhost:4000/quizRoute/startExam', {size: this.noOfQuizs, candidateID: candidateID} ).subscribe((resp:any) => {
       if(resp && resp.quizs){
@@ -104,6 +104,17 @@ export class QuizComponent implements OnInit {
   }
 
   getNextQuestion(){
+    console.log('next button clicked')
+    let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
+    this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {candidateID: candidateID} ).subscribe((resp:any) => {
+      if(resp && resp.quizs){
+        resp.quizs.forEach(q => {
+          q.answer = "";
+          q.options = this.convertOtionsToJson(q.options);
+        });
+        this.questions.push(resp.quizs[0]);
+      }
+    });
 
   }
   getPrevQuestion(){
