@@ -112,10 +112,16 @@ export class QuizComponent implements OnInit {
       console.log(this.questions.length, "questionsquestionsquestions");
       this.activeQuestionNumber = this.activeQuestionNumber + 1;
       this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
+      this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
     }else{
-      console.log('next button clicked');
+      console.log('next button clicked', this.activeQuestion);
       let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-      this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {candidateID: candidateID} ).subscribe((resp:any) => {
+      this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
+        candidateID: candidateID,
+        stats: { 
+          question: this.activeQuestion
+          }
+        }).subscribe((resp:any) => {
         if(resp && resp.quizs){
           resp.quizs.forEach(q => {
             q.answer = "";
