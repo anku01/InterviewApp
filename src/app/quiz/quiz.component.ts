@@ -18,6 +18,8 @@ export class QuizComponent implements OnInit {
   countDownDate: number = 0;
   noOfQuizs: number = parseInt(sessionStorage.getItem("TestDuration")) || 15;
   questions: any = [];
+  activeQuestion:any = [];
+  activeQuestionNumber: number = 1;
 
 
   goto_quiz() {
@@ -67,6 +69,7 @@ export class QuizComponent implements OnInit {
           q.options = this.convertOtionsToJson(q.options);
         });
         this.questions.push(resp.quizs[0]);
+        this.activeQuestion = resp.quizs;
       }
 
       if (this.noOfQuizs === 15)
@@ -75,7 +78,6 @@ export class QuizComponent implements OnInit {
         this.countDownDate = (new Date().getTime()) + (1000 * 60 * 45)
       if (this.noOfQuizs === 30)
         this.countDownDate = (new Date().getTime()) + (1000 * 60 * 60)
-
     });
   }
 
@@ -100,25 +102,35 @@ export class QuizComponent implements OnInit {
     }
     questionNo = this.questions.findIndex(findQuestions);
     this.questions[questionNo].answer = optionNo;
+    this.activeQuestion[0].answer = optionNo;
     sessionStorage.setItem("exam", JSON.stringify(this.questions));
   }
 
   getNextQuestion(){
-    console.log('next button clicked')
-    let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {candidateID: candidateID} ).subscribe((resp:any) => {
-      if(resp && resp.quizs){
-        resp.quizs.forEach(q => {
-          q.answer = "";
-          q.options = this.convertOtionsToJson(q.options);
-        });
-        this.questions.push(resp.quizs[0]);
-      }
-    });
-
+    
+    if(this.questions.length > this.activeQuestionNumber){
+      console.log(this.questions.length, "questionsquestionsquestions");
+      this.activeQuestionNumber = this.activeQuestionNumber + 1;
+      this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
+    }else{
+      console.log('next button clicked');
+      let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
+      this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {candidateID: candidateID} ).subscribe((resp:any) => {
+        if(resp && resp.quizs){
+          resp.quizs.forEach(q => {
+            q.answer = "";
+            q.options = this.convertOtionsToJson(q.options);
+          });
+          this.questions.push(resp.quizs[0]);
+          this.activeQuestion = resp.quizs;
+          this.activeQuestionNumber = this.activeQuestionNumber + 1;
+        }
+      });
+    }
   }
   getPrevQuestion(){
-
+    this.activeQuestionNumber = this.activeQuestionNumber - 1;
+    this.activeQuestion = [this.questions[this.activeQuestionNumber -1]];
   }
 
 }

@@ -1,9 +1,9 @@
 <div class="container-fluid timer"> <span class="alert alert-success"> {{minutes}}:{{seconds}}</span></div>
 <form>
   <div class="container Question-wrapper">
-    <div class="quiz" *ngFor="let q of questions; let  i = index;">
+    <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
       <div class="question">
-        <P><span>{{i+1}}) </span>{{q.q_text}} </P>
+        <P><span>{{activeQuestionNumber}})}} </span>{{q.q_text}} </P>
       </div>
       
       <div class="answer row">
@@ -14,7 +14,7 @@
     </div>
     <div class="prev_next" id="pagination">
       <button (click)="getPrevQuestion()" class="next btn-warning">Prev</button>
-      <button (click)="getNextQuestion()" class="prev btn-warning">Next</button>
+      <button [disabled]="activeQuestionNumber === noOfQuizs" (click)="getNextQuestion()" class="prev btn-warning">Next</button>
       <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
     </div>
     <div class="save_submit" align="center">
