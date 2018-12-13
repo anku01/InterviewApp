@@ -32,3 +32,6 @@
 /* #pagination .pagination-next{
     margin-left: 500px;
 } */
+button[disabled], html input[disabled] {
+    cursor: no-drop;
+}
