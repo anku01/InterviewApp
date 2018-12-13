@@ -108,13 +108,13 @@ export class QuizComponent implements OnInit {
 
   getNextQuestion(){
     
-    if(this.questions.length > this.activeQuestionNumber){
+    
       console.log(this.questions.length, "questionsquestionsquestions");
-      this.activeQuestionNumber = this.activeQuestionNumber + 1;
-      this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
+      // this.activeQuestionNumber = this.activeQuestionNumber + 1;
+      // this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
       this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
-    }else{
       console.log('next button clicked', this.activeQuestion);
+
       let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
       this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
         candidateID: candidateID,
@@ -132,7 +132,6 @@ export class QuizComponent implements OnInit {
           this.activeQuestionNumber = this.activeQuestionNumber + 1;
         }
       });
-    }
   }
   getPrevQuestion(){
     this.activeQuestionNumber = this.activeQuestionNumber - 1;
