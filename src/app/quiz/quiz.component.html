@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="prev_next" id="pagination">
-      <button (click)="getPrevQuestion()" class="next btn-warning">Prev</button>
+      <button [disabled]="activeQuestionNumber <=1" (click)="getPrevQuestion()" class="next btn-warning">Prev</button>
       <button [disabled]="activeQuestionNumber === noOfQuizs" (click)="getNextQuestion()" class="prev btn-warning">Next</button>
       <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
     </div>
