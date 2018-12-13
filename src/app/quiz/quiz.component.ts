@@ -91,9 +91,7 @@ export class QuizComponent implements OnInit {
         return $2;
       }
     });
-    option = JSON.parse(option);
-    option.userAnswer = "";
-    return option;
+    return JSON.parse(option);
   }
 
   getAnswer(q, questionNo, optionNo) {
@@ -112,6 +110,10 @@ export class QuizComponent implements OnInit {
       console.log(this.questions.length, "questionsquestionsquestions");
       // this.activeQuestionNumber = this.activeQuestionNumber + 1;
       // this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
+      var questionId: any = "";
+      if(this.questions[this.activeQuestionNumber] && this.questions[this.activeQuestionNumber]._id ){
+        questionId = this.questions[this.activeQuestionNumber ]._id;
+      }
       this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
       console.log('next button clicked', this.activeQuestion);
 
@@ -121,12 +123,14 @@ export class QuizComponent implements OnInit {
         stats: { 
           question: this.activeQuestion
           },
-          noOfQuizs: this.noOfQuizs
+          noOfQuizs: this.noOfQuizs,
+          questionId: questionId || ""
         }).subscribe((resp:any) => {
         if(resp && resp.quizs){
           resp.quizs.forEach(q => {
+            console.log(q,"optionsoptionsoptionsoptions");
             q.answer = "";
-            q.options = this.convertOtionsToJson(q.options);
+            q.options = this.convertOtionsToJson(JSON.stringify(q.options));
           });
           this.questions.push(resp.quizs[0]);
           this.activeQuestion = resp.quizs;
@@ -150,8 +154,9 @@ export class QuizComponent implements OnInit {
         }).subscribe((resp:any) => {
         if(resp && resp.quizs){
           resp.quizs.forEach(q => {
+            console.log(q,"getPrevQuestiongetPrevQuestion");
             q.answer = "";
-            q.options = this.convertOtionsToJson(q.options);
+            q.options = this.convertOtionsToJson(JSON.stringify(q.options));
           });
           this.questions.push(resp.quizs[0]);
           this.activeQuestion = resp.quizs;
