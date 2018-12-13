@@ -130,11 +130,12 @@ export class QuizComponent implements OnInit {
           resp.quizs.forEach(q => {
             console.log(q,"optionsoptionsoptionsoptions");
             q.answer = "";
-            q.options = this.convertOtionsToJson(JSON.stringify(q.options));
+            q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
           });
-          this.questions.push(resp.quizs[0]);
           this.activeQuestion = resp.quizs;
           this.activeQuestionNumber = this.activeQuestionNumber + 1;
+          this.questions[this.activeQuestionNumber -1] = resp.quizs[0];
+
         }
       });
   }
@@ -156,17 +157,17 @@ export class QuizComponent implements OnInit {
           resp.quizs.forEach(q => {
             console.log(q,"getPrevQuestiongetPrevQuestion");
             q.answer = "";
-            q.options = this.convertOtionsToJson(JSON.stringify(q.options));
+            q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
           });
-          this.questions.push(resp.quizs[0]);
           this.activeQuestion = resp.quizs;
           this.activeQuestionNumber = this.activeQuestionNumber - 1;
+          this.questions[this.activeQuestionNumber -1] = resp.quizs[0];
         }
       });
 
 
-    this.activeQuestionNumber = this.activeQuestionNumber - 1;
-    this.activeQuestion = [this.questions[this.activeQuestionNumber -1]];
+    // this.activeQuestionNumber = this.activeQuestionNumber - 1;
+    // this.activeQuestion = [this.questions[this.activeQuestionNumber -1]];
   }
 
 }
