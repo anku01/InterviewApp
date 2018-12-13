@@ -120,7 +120,8 @@ export class QuizComponent implements OnInit {
         candidateID: candidateID,
         stats: { 
           question: this.activeQuestion
-          }
+          },
+          noOfQuizs: this.noOfQuizs
         }).subscribe((resp:any) => {
         if(resp && resp.quizs){
           resp.quizs.forEach(q => {
@@ -134,6 +135,31 @@ export class QuizComponent implements OnInit {
       });
   }
   getPrevQuestion(){
+
+    this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
+      console.log('next button clicked', this.activeQuestion);
+
+      let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
+      this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
+        candidateID: candidateID,
+        stats: { 
+          question: this.activeQuestion,
+          },
+        questionId: this.questions[this.activeQuestionNumber -2]._id,
+        noOfQuizs: this.noOfQuizs
+        }).subscribe((resp:any) => {
+        if(resp && resp.quizs){
+          resp.quizs.forEach(q => {
+            q.answer = "";
+            q.options = this.convertOtionsToJson(q.options);
+          });
+          this.questions.push(resp.quizs[0]);
+          this.activeQuestion = resp.quizs;
+          this.activeQuestionNumber = this.activeQuestionNumber - 1;
+        }
+      });
+
+
     this.activeQuestionNumber = this.activeQuestionNumber - 1;
     this.activeQuestion = [this.questions[this.activeQuestionNumber -1]];
   }
