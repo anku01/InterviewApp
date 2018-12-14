@@ -108,7 +108,6 @@ export class QuizComponent implements OnInit {
   getNextQuestion(){
     
     
-      console.log(this.questions.length, "questionsquestionsquestions");
       // this.activeQuestionNumber = this.activeQuestionNumber + 1;
       // this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
       var questionId: any = "";
@@ -129,8 +128,7 @@ export class QuizComponent implements OnInit {
         }).subscribe((resp:any) => {
         if(resp && resp.quizs){
           resp.quizs.forEach(q => {
-            console.log(q,"optionsoptionsoptionsoptions");
-            q.answer = "";
+            q.answer = q.answer === 0 ? 0 : q.answer || "";
             q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
           });
           this.activeQuestion = resp.quizs;
@@ -143,7 +141,6 @@ export class QuizComponent implements OnInit {
   getPrevQuestion(){
 
     this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
-      console.log('next button clicked', this.activeQuestion);
 
       let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
       this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
@@ -156,8 +153,7 @@ export class QuizComponent implements OnInit {
         }).subscribe((resp:any) => {
         if(resp && resp.quizs){
           resp.quizs.forEach(q => {
-            console.log(q,"getPrevQuestiongetPrevQuestion");
-            q.answer = "";
+            q.answer  = q.answer === 0 ? 0 : q.answer || "";
             q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
           });
           this.activeQuestion = resp.quizs;
