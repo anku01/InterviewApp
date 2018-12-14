@@ -52,10 +52,11 @@ export class QuizComponent implements OnInit {
       this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       this.seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // If the count down is finished, write some text 
+      // If the count down is finished, goto quiz result
       if (distance < 0) {
         clearInterval(interval);
-        alert("Time over");
+        this.goto_quiz_result();
+        // alert("Time over");
       }
     }, 1000);
   }
