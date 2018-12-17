@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 export class QuizResultComponent implements OnInit {
 
   constructor(private router: Router) { }
- 
+  result:any =  {};
   ngOnInit() {
+    this.result = JSON.parse(sessionStorage.getItem("examResult"));
   }
 
 }

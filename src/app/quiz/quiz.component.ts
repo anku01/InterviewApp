@@ -32,9 +32,10 @@ export class QuizComponent implements OnInit {
       candidateData: JSON.parse(sessionStorage.getItem("candidateData"))
     };
     this.http.post('http://localhost:4000/quizRoute/submitExam', examData).subscribe((resp: any) => {
-
-    })
-    this.router.navigate(['./quiz-result']);
+      sessionStorage.setItem("examResult", JSON.stringify(resp));
+      this.router.navigate(['./quiz-result']);
+    });
+    // this.router.navigate(['./quiz-result']);
   }
   ngOnInit() {
     this.startExam();
