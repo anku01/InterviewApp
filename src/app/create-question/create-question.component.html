@@ -67,8 +67,9 @@
       <!-- <button title="Remove Option" (click)="removeInputField()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-minus"></span></button> -->
       <button title="Add Option" (click)="addInputField()" type="button" class="btn btn-success action-option"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
-    <div class="row btn-center">
+    <div class="row text-right">
       <button type="submit" class="btn btn-success">{{id ? "Update " : "Save "}} Question</button>
+      <button (click)="goto_question_list()" type="button" class="btn btn-default">Cancel</button>
     </div>
   </form>
 </div>
