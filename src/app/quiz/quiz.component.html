@@ -13,11 +13,11 @@
       </div>
     </div>
     <div class="prev_next" id="pagination">
-      <button [disabled]="activeQuestionNumber <=1" (click)="getPrevQuestion()" class="next btn-warning">Prev</button>
-      <button [disabled]="activeQuestionNumber === noOfQuizs" (click)="getNextQuestion()" class="prev btn-warning">Next</button>
-      <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+      
     </div>
     <div class="save_submit" align="center">
+        <button [disabled]="activeQuestionNumber <=1" (click)="getPrevQuestion()" class="next btn-warning">Prev</button>
+        <button [disabled]="activeQuestionNumber === noOfQuizs" (click)="getNextQuestion()" class="prev btn-warning">Next</button>
     <button type="submit" class="btn btn-success pull-right " (click)="goto_quiz_result()">SUBMIT TEST</button>
   </div>
   </div>

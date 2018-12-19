@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let question of questions">
+          <tr *ngFor="let question of questions | paginate: { itemsPerPage: 20, currentPage: p }">
             <td width="70%">{{question.q_text}}</td>
             <td>{{question.severity}}</td>
             <td class="action">
@@ -27,6 +27,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="col-md-12 text-right">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 

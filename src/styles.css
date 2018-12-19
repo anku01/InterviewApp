@@ -8,7 +8,11 @@
     width:338px;
 }
 .login-panel{background-color:#e4f0f5;padding:20px; border-radius:10px;}
-.Question-wrapper{margin:5px auto;border: 2px solid #3d7e9a;padding:20px;background-color:#e4f0f5;margin: 100px auto;}
+.Question-wrapper{margin:5px auto;
+    padding:20px;margin: 100px auto;
+    background-color: #e4f0f5;
+    border: 1px solid #3d7e9a;
+}
 .invalid-feedback{color:red; font-weight: 550;font-size: 14px;}
 .btn-success {
     color: #fff;
@@ -16,22 +20,20 @@
     border-color: #83d0f2;
 }
 
-.ngx-pagination li{
+/* .ngx-pagination li{
     display: none !important;
 }
 #pagination .pagination-previous, #pagination .pagination-next{
     display: inline-block !important;
-}
-#pagination .pagination-previous a:hover, #pagination .pagination-next a:hover{
+} */
+/* #pagination .pagination-previous a:hover, #pagination .pagination-next a:hover{
     text-decoration: none;
 }
 #pagination .pagination-previous a,#pagination .pagination-next a{
     background-color: #3d7e9a; 
     color: #fff;
-}
-/* #pagination .pagination-next{
-    margin-left: 500px;
 } */
+
 button[disabled], html input[disabled] {
     cursor: no-drop;
 }
