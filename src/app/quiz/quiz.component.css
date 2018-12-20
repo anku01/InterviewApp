@@ -9,3 +9,11 @@ ul.option_list{padding-left:10px;min-height: 50px !important;}
 .quiz{
     margin-top: 50px;
 }
+.code-section{
+    font-size: 18px !important;
+    border: none;
+    background-color: #e4f0f5;
+}
+.code-section-options{
+    display: inline;
+}

@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class QuestionListComponent implements OnInit {
   questions: any;
   question: {};
+  resultData:[];
  
   constructor(private router: Router, private commonService: CommonService, private http: HttpClient) {
 
@@ -24,7 +25,12 @@ export class QuestionListComponent implements OnInit {
     this.http.get('http://localhost:4000/questionRoute/questions').subscribe(data => {
       this.questions = data;
     });
+  }
 
+  get_results() {
+    this.http.get('http://localhost:4000/exam/results').subscribe((data:any) => {
+      this.resultData = data;
+    });
   }
 
   edit_question(id) {
@@ -42,6 +48,7 @@ export class QuestionListComponent implements OnInit {
   }
   ngOnInit() {
     this.get_questions();
+    this.get_results();
   }
 
 }
