@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionListComponent } from './question-list/question-list.component';
-import { QuizResultComponent } from './quiz-result/quiz-result.component';
+import { QuizResultComponent } from './thankyouMsg/quiz-result.component';
 import { CreateQuestionComponent } from './create-question/create-question.component';
 import { CommonService } from './service/common.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
