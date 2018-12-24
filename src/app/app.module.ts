@@ -15,9 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StartQuizComponent } from './start-quiz/start-quiz.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BlockCopyPasteDirective } from './directive/block-copy-paste.directive';
-
-
-
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 
 const appRoutes : Routes = [
@@ -53,8 +51,8 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    MonacoEditorModule.forRoot(),
     RouterModule.forRoot(appRoutes)
-
   ],
   providers: [CommonService],
   bootstrap: [AppComponent]

@@ -11,6 +11,16 @@ export class QuestionListComponent implements OnInit {
   questions: any;
   question: {};
   resultData:any = [];
+  editorOption = {
+    language: 'javascript', 
+    readOnly: 'true', 
+    lineNumbers:'off', 
+    automaticLayout: true,
+    scrollBeyondLastLine: false, 
+    minimap: {
+      enabled: 'false'
+    }
+  };
  
   constructor(private router: Router, private commonService: CommonService, private http: HttpClient) {
 

@@ -2,8 +2,9 @@
 <form>
   <div class="container Question-wrapper">
     <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
-      <div appBlockCopyPaste class="question">
-        <pre  class="code-section"><span>{{activeQuestionNumber}}. </span>{{q.q_text}} </pre>
+      <div class="question">
+        <pre  class="code-section"><span>{{activeQuestionNumber}}. </span>{{q.question.text}} </pre>
+        <ngx-monaco-editor name="code" [options]="editorOption" class="form-control" [(ngModel)]="q.question.code"></ngx-monaco-editor>
       </div>
       
       <div class="answer row ">

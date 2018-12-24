@@ -18,9 +18,15 @@
     <div class="row">
       <div class="col-sm-12 form-group">
         <label for="name">Question:</label><br>
-        <textarea rows="4" class="form-control" name="q_text" [(ngModel)]="questionFormData.q_text" cols="100"
+        <textarea rows="4" class="form-control" name="q_text" [(ngModel)]="questionFormData.question.text" cols="100"
           placeholder="Type your Question">
-            </textarea>
+        </textarea>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="isCode" [(ngModel)]="questionFormData.question.hasCode" [checked]="questionFormData.question.hasCode"> Question has code
+          </label>
+        </div>
+        <ngx-monaco-editor [ngClass]="{'hidden': !questionFormData.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="questionFormData.question.code"></ngx-monaco-editor>
         <!-- <div class="invalid-feedback" *ngIf="submitted && formControls.q_text.errors">This Field is required</div> -->
 
       </div>

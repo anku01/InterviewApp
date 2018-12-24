@@ -28,7 +28,9 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let question of questions | paginate: { itemsPerPage: 20, currentPage: p }">
-                          <td width="70%">{{question.q_text}}</td>
+                          <td width="70%">{{question.question.text}}
+                            <ngx-monaco-editor [ngClass]="{'hidden': !question.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="question.question.code"></ngx-monaco-editor>
+                          </td>
                           <td>{{question.severity}}</td>
                           <td class="action">
                             <button class="btn btn-success" (click)="edit_question(question._id)"><span class="glyphicon glyphicon-pencil"></span></button>

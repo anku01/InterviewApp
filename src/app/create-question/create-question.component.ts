@@ -12,13 +12,27 @@ export class CreateQuestionComponent implements OnInit {
   questionFormData:any = {
     options: [{0: "0", value: "", isCorrect: false},{1: "1", value: "", isCorrect: false},{2: "2", value: "", isCorrect: false},{3: "3", value: "", isCorrect: false}],
     q_type: "",
-    q_text: "",
+    question: {
+      text: "",
+      code: "",
+      hasCode: true
+    },
     selected_sev: "",
     selected_tech: "",
   };
   id: string;
   counter:any = 4;
   resp:any = {options: ''};
+  editorOption = {
+    language: 'javascript', 
+    lineNumbers:'off', 
+    automaticLayout: true,
+    scrollBeyondLastLine: false, 
+    minimap: {
+      enabled: 'false'
+    }
+  };
+
   
   constructor(private router: Router, 
     private commonService: CommonService,
@@ -28,11 +42,6 @@ export class CreateQuestionComponent implements OnInit {
    selected_sev:boolean;
    selected_tech:boolean
  
-  
-
- 
-
-
   goto_question_list() {
     this.router.navigate(['./question-list']);
   }

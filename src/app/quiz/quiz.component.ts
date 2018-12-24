@@ -20,7 +20,17 @@ export class QuizComponent implements OnInit {
   questions: any = [];
   activeQuestion:any = [];
   activeQuestionNumber: number = 1;
-
+  editorOption = {
+    language: 'javascript', 
+    readOnly: 'true', 
+    lineNumbers:'off', 
+    automaticLayout: true,
+    scrollBeyondLastLine: false, 
+    minimap: {
+      enabled: 'false'
+    }
+  };
+    
 
   goto_quiz() {
     // this.router.navigate(['./quiz']);
