@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StartQuizComponent } from './start-quiz/start-quiz.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BlockCopyPasteDirective } from './directive/block-copy-paste.directive';
+import { ExamDetailsComponent } from './exam-details/exam-details.component';
 
 
 
@@ -30,6 +31,7 @@ const appRoutes : Routes = [
    {path : 'question-list', component :  QuestionListComponent},
    {path : 'create-question', component :  CreateQuestionComponent},
   {path : 'edit/:id', component : CreateQuestionComponent},
+  {path : 'exam-details/:examId', component : ExamDetailsComponent},
   {path : '', redirectTo : '/candidate' , pathMatch: 'full'}
 ]
 
@@ -45,7 +47,8 @@ const appRoutes : Routes = [
     QuizResultComponent,
     CreateQuestionComponent,
     StartQuizComponent,
-    BlockCopyPasteDirective
+    BlockCopyPasteDirective,
+    ExamDetailsComponent
   ],
   imports: [
     BrowserModule,
