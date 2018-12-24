@@ -31,6 +31,9 @@ export class QuestionListComponent implements OnInit {
   goto_add_question() {
     this.router.navigate(['./create-question']);
   }
+  goToExamDetail(candidateId){
+    this.router.navigate(['./exam-details', candidateId]);
+  }
   get_questions() {
     this.http.get('http://localhost:4000/questionRoute/questions').subscribe(data => {
       this.questions = data;
@@ -56,6 +59,8 @@ export class QuestionListComponent implements OnInit {
       this.questions.splice(this.questions.indexOf(q), 1);
     });
   }
+
+  
   ngOnInit() {
     this.get_questions();
     this.get_results();

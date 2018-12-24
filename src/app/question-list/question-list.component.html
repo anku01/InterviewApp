@@ -54,6 +54,7 @@
                         <th>Contact</th>
                         <th>score</th>
                         <th>Date</th>
+                        <th>Details</th>
                       </tr>
                     </thead>
                     <tbody >
@@ -62,6 +63,7 @@
                         <td>{{result.contact}}</td>
                         <td>{{result.score}}/{{result.totalQuestions}}</td>
                         <td>{{result.submitedOn | date:"medium"}}</td>
+                        <td class="text-center action"><button (click)=goToExamDetail(result.candidateId) title="View in  Detail" class="btn btn-success glyphicon glyphicon-eye-open"></button></td>
                         <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
                               </td> -->
                       </tr>
