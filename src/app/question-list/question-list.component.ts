@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class QuestionListComponent implements OnInit {
   questions: any;
   question: {};
-  resultData:[];
+  resultData:any = [];
  
   constructor(private router: Router, private commonService: CommonService, private http: HttpClient) {
 

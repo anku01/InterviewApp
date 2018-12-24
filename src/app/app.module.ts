@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StartQuizComponent } from './start-quiz/start-quiz.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BlockCopyPasteDirective } from './directive/block-copy-paste.directive';
 
 
 
@@ -43,7 +44,8 @@ const appRoutes : Routes = [
     QuestionListComponent,
     QuizResultComponent,
     CreateQuestionComponent,
-    StartQuizComponent
+    StartQuizComponent,
+    BlockCopyPasteDirective
   ],
   imports: [
     BrowserModule,

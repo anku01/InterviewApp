@@ -2,14 +2,14 @@
 <form>
   <div class="container Question-wrapper">
     <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
-      <div class="question">
-        <pre class="code-section"><span>{{activeQuestionNumber}}. </span>{{q.q_text}} </pre>
+      <div appBlockCopyPaste class="question">
+        <pre  class="code-section"><span>{{activeQuestionNumber}}. </span>{{q.q_text}} </pre>
       </div>
       
       <div class="answer row ">
         <ul class="col-md-12 option_list" *ngFor="let option of q.options; let idx = index;">
           <input type="radio" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" (click)="getAnswer(q, i, idx)">
-          <pre class="code-section code-section-options">{{option.value}}</pre>
+          <pre appBlockCopyPaste class="code-section code-section-options">{{option.value}}</pre>
         </ul>
       </div>
     </div>
