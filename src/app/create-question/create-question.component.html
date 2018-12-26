@@ -61,19 +61,23 @@
 
       </div>
     </div>
-    <div class="row" *ngFor="let option of questionFormData.options; let i= index">
+    <div class="row" *ngFor="let option of questionFormData.options; let i= index; last as isLast;">
       <div class="col-sm-8 form-group">
         <label for="name">Option {{i+1}}:</label>
-        <input type="text" name="{{i}}" #{{i}}="ngModel" [ngClass]="{ 'is-invalid': f.submitted && i.invalid }" required [(ngModel)]="option.value" class="form-control">        
+        <input type="text" name="{{i}}" #{{i}}="ngModel" [ngClass]="{ 'is-invalid': f.submitted && i.invalid }" required [(ngModel)]="option.value" class="form-control">
         <div class="invalid-feedback" *ngIf="f.submitted && option.value.length ==0">Option can not be Empty</div>
       </div>
-      <div class="col-sm-4">
+      
+      <div class="col-sm-2">
         <label *ngIf="i===0" for="name">Correct Option</label>
         <input type="checkbox" name="isCorrecet{{i}}" [(ngModel)]="option.isCorrect" class="correct-check">
       </div>
+      <div class="col-sm-2 remove-option">
+          <button *ngIf="isLast" (click)="removeInputField()" class="btn btn-success" title="Remove Option"> <span class="glyphicon glyphicon-remove"></span> </button>       
+      </div>
     </div>
     <div class="row">
-      <!-- <button title="Remove Option" (click)="removeInputField()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-minus"></span></button> -->
+      
       <button title="Add Option" (click)="addInputField()" type="button" class="btn btn-success action-option"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
     <div class="row text-right">
