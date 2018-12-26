@@ -184,5 +184,10 @@ export class QuizComponent implements OnInit {
     // this.activeQuestionNumber = this.activeQuestionNumber - 1;
     // this.activeQuestion = [this.questions[this.activeQuestionNumber -1]];
   }
+  onEditorInit(editor) {
+    const contentHeight = (editor.getModel().getLineCount() * 19) + 10;
+    editor.domElement.parentElement.style.height = contentHeight + 'px';
+    editor.layout();
+  }
 
 }
