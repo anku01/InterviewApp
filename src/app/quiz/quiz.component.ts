@@ -12,26 +12,26 @@ import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 export class QuizComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) { }
-
+  email: string = '';
   minutes: number = 0;
   seconds: number = 0;
   countDownDate: number = 0;
   noOfQuizs: number = parseInt(sessionStorage.getItem("TestDuration")) || 15;
   questions: any = [];
-  activeQuestion:any = [];
+  activeQuestion: any = [];
   activeQuestionNumber: number = 1;
   editorOption = {
-    language: 'javascript', 
-    readOnly: 'true', 
-    lineNumbers:'off', 
+    language: 'javascript',
+    readOnly: 'true',
+    lineNumbers: 'off',
     automaticLayout: true,
-    scrollBeyondLastLine: false, 
+    scrollBeyondLastLine: false,
     minimap: {
       enabled: 'false'
     },
     contextmenu: 'false'
   };
-    
+
 
   goto_quiz() {
     // this.router.navigate(['./quiz']);
@@ -49,6 +49,7 @@ export class QuizComponent implements OnInit {
     // this.router.navigate(['./quiz-result']);
   }
   ngOnInit() {
+    this.email = (JSON.parse(sessionStorage.getItem("candidateData")).email).split('@')[0];
     window.addEventListener("beforeunload", function (e) {
       var confirmationMessage = "\o/";
       console.log("cond");
@@ -81,8 +82,8 @@ export class QuizComponent implements OnInit {
 
   startExam() {
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/startExam', {size: this.noOfQuizs, candidateID: candidateID} ).subscribe((resp:any) => {
-      if(resp && resp.quizs){
+    this.http.post('http://localhost:4000/quizRoute/startExam', { size: this.noOfQuizs, candidateID: candidateID }).subscribe((resp: any) => {
+      if (resp && resp.quizs) {
         resp.quizs.forEach(q => {
           q.answer = "";
           q.options = this.convertOtionsToJson(q.options);
@@ -123,62 +124,62 @@ export class QuizComponent implements OnInit {
     sessionStorage.setItem("exam", JSON.stringify(this.questions));
   }
 
-  getNextQuestion(){
-    
-    
-      // this.activeQuestionNumber = this.activeQuestionNumber + 1;
-      // this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
-      var questionId: any = "";
-      if(this.questions[this.activeQuestionNumber] && this.questions[this.activeQuestionNumber]._id ){
-        questionId = this.questions[this.activeQuestionNumber ]._id;
+  getNextQuestion() {
+
+
+    // this.activeQuestionNumber = this.activeQuestionNumber + 1;
+    // this.activeQuestion = [this.questions[this.activeQuestionNumber-1]];
+    var questionId: any = "";
+    if (this.questions[this.activeQuestionNumber] && this.questions[this.activeQuestionNumber]._id) {
+      questionId = this.questions[this.activeQuestionNumber]._id;
+    }
+    this.activeQuestion[0].answer = this.questions[this.activeQuestionNumber - 1]['answer'];
+    console.log('next button clicked', this.activeQuestion);
+
+    let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
+    this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
+      candidateID: candidateID,
+      stats: {
+        question: this.activeQuestion
+      },
+      noOfQuizs: this.noOfQuizs,
+      questionId: questionId || ""
+    }).subscribe((resp: any) => {
+      if (resp && resp.quizs) {
+        resp.quizs.forEach(q => {
+          q.answer = q.answer === 0 ? 0 : q.answer || "";
+          q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
+        });
+        this.activeQuestion = resp.quizs;
+        this.activeQuestionNumber = this.activeQuestionNumber + 1;
+        this.questions[this.activeQuestionNumber - 1] = resp.quizs[0];
+
       }
-      this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
-      console.log('next button clicked', this.activeQuestion);
-
-      let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-      this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
-        candidateID: candidateID,
-        stats: { 
-          question: this.activeQuestion
-          },
-          noOfQuizs: this.noOfQuizs,
-          questionId: questionId || ""
-        }).subscribe((resp:any) => {
-        if(resp && resp.quizs){
-          resp.quizs.forEach(q => {
-            q.answer = q.answer === 0 ? 0 : q.answer || "";
-            q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
-          });
-          this.activeQuestion = resp.quizs;
-          this.activeQuestionNumber = this.activeQuestionNumber + 1;
-          this.questions[this.activeQuestionNumber -1] = resp.quizs[0];
-
-        }
-      });
+    });
   }
-  getPrevQuestion(){
+  getPrevQuestion() {
 
-    this.activeQuestion[0].answer =  this.questions[this.activeQuestionNumber-1]['answer'];
+    this.activeQuestion[0].answer = this.questions[this.activeQuestionNumber - 1]['answer'];
 
-      let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-      this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
-        candidateID: candidateID,
-        stats: { 
-          question: this.activeQuestion,
-          },
-        questionId: this.questions[this.activeQuestionNumber -2]._id,
-        noOfQuizs: this.noOfQuizs
-        }).subscribe((resp:any) => {
-        if(resp && resp.quizs){
-          resp.quizs.forEach(q => {
-            q.answer  = q.answer === 0 ? 0 : q.answer || "";
-            q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
-          });
-          this.activeQuestion = resp.quizs;
-          this.activeQuestionNumber = this.activeQuestionNumber - 1;
-          this.questions[this.activeQuestionNumber -1] = resp.quizs[0];
-        }
-      });
+    let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
+    this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
+      candidateID: candidateID,
+      stats: {
+        question: this.activeQuestion,
+      },
+      questionId: this.questions[this.activeQuestionNumber - 2]._id,
+      noOfQuizs: this.noOfQuizs
+    }).subscribe((resp: any) => {
+      if (resp && resp.quizs) {
+        resp.quizs.forEach(q => {
+          q.answer = q.answer === 0 ? 0 : q.answer || "";
+          q.options = typeof q.options === "object" ? q.options : this.convertOtionsToJson(q.options);
+        });
+        this.activeQuestion = resp.quizs;
+        this.activeQuestionNumber = this.activeQuestionNumber - 1;
+        this.questions[this.activeQuestionNumber - 1] = resp.quizs[0];
+      }
+    });
 
 
     // this.activeQuestionNumber = this.activeQuestionNumber - 1;
