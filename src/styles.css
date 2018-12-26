@@ -1,24 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
-.wrapper{
+
+.wrapper {
     position: absolute;
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width:338px;
+    width: 338px;
 }
-.login-panel{background-color:#e4f0f5;padding:20px; border-radius:10px;}
-.Question-wrapper{margin:5px auto;
-    padding:20px;margin: 100px auto;
+
+.login-panel {
     background-color: #e4f0f5;
-    border: 1px solid #3d7e9a;
+    padding: 20px;
+    border-radius: 10px;
 }
-.invalid-feedback{color:red; font-weight: 550;font-size: 14px;}
+
+.invalid-feedback {
+    color: red;
+    font-weight: 550;
+    font-size: 14px;
+}
+
 .btn-success {
     color: #fff;
     background-color: #3d7e9a;
     border-color: #83d0f2;
 }
+
 
 /* .ngx-pagination li{
     display: none !important;
@@ -26,6 +34,8 @@
 #pagination .pagination-previous, #pagination .pagination-next{
     display: inline-block !important;
 } */
+
+
 /* #pagination .pagination-previous a:hover, #pagination .pagination-next a:hover{
     text-decoration: none;
 }
@@ -34,6 +44,7 @@
     color: #fff;
 } */
 
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
     cursor: no-drop;
 }

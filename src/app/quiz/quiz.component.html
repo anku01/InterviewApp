@@ -1,25 +1,64 @@
-<div class="container-fluid timer"> <span class="alert alert-success"> {{minutes}}:{{seconds}}</span></div>
-<form>
-  <div class="container Question-wrapper">
-    <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
-      <div appBlockCopyPaste class="question">
-        <pre  class="code-section"><span>{{activeQuestionNumber}}. </span>{{q.q_text}} </pre>
-      </div>
-      
-      <div class="answer row ">
-        <ul class="col-md-12 option_list" *ngFor="let option of q.options; let idx = index;">
-          <input type="radio" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" (click)="getAnswer(q, i, idx)">
-          <pre appBlockCopyPaste class="code-section code-section-options">{{option.value}}</pre>
-        </ul>
-      </div>
+<div class="container-fluid timer">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title_heading">Online Test Series</h3>
+        </div>
     </div>
-    <div class="prev_next" id="pagination">
-      
+    <div class="row">
+        <div class="col-md-10">
+            <div class="Question-wrapper">
+                <div class="questionTitle"># Question {{activeQuestionNumber}}</div>
+
+                <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
+                    <div appBlockCopyPaste class="question">
+                        <p>{{q.question.text}} </p>
+                        <pre *ngIf="q.question.hasCode"><code>{{q.question.code}}</code></pre>
+                    </div>
+
+                    <div class="answer row ">
+                        <ul class="col-md-12 option_list">
+                            <li *ngFor="let option of q.options; let idx = index;">
+                                <input type="radio" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" (click)="getAnswer(q, i, idx)">
+                                <p appBlockCopyPaste class="code-section code-section-options">{{option.value}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 footerMainContainer">
+                        <div class="footerButtonContainer">
+                            <div class="pull-left">
+                                <button [disabled]="activeQuestionNumber <=1" (click)="getPrevQuestion()" class="prev button">Prev</button>
+                                <button [disabled]="activeQuestionNumber === noOfQuizs" (click)="getNextQuestion()" class=" next button">Next</button>
+                            </div>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-success pull-right " (click)="goto_quiz_result()">SUBMIT TEST</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="row userDetailbox">
+
+
+
+                <div class="imgbox">
+                    <img src="/assets/img/user.png" alt="" srcset="">
+                </div>
+                <div class="DetailBox">
+                    <p>User Name <b>ManishBand</b></p>
+                    <p>Time Remaining <b>{{minutes}}:{{seconds}}</b></p>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="save_submit" align="center">
-        <button [disabled]="activeQuestionNumber <=1" (click)="getPrevQuestion()" class="next btn-warning">Prev</button>
-        <button [disabled]="activeQuestionNumber === noOfQuizs" (click)="getNextQuestion()" class="prev btn-warning">Next</button>
-    <button type="submit" class="btn btn-success pull-right " (click)="goto_quiz_result()">SUBMIT TEST</button>
-  </div>
-  </div>
-</form>
+
+
+
+</div>
