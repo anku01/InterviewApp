@@ -12,11 +12,11 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
             <div class="row quizStats">
-                <div *ngIf="examDetails.candidateData" class="col-md-12">Candidate Email: {{examDetails.candidateData[0].email}}<span class="pull-right">Exam Date: {{examDetails.candidateData[0].submitedOn|date:"mm/dd/yyyy, h:mm a"}}</span></div>
-                <div *ngIf="examDetails.candidateData && examDetails.candidateData[0].contact" class="col-md-12">Contact No: {{examDetails.candidateData[0].contact}}</div>
-                <div *ngIf="examDetails.candidateData" class="col-md-6">Exam Score: {{examDetails.candidateData[0].score}}</div>
+                <div *ngIf="examDetails.candidateData" class="col-md-12">Candidate Email: {{examDetails.candidateData.email}}<span class="pull-right">Exam Date: {{examDetails.candidateData.submitedOn|date:"dd/mm/yyyy, h:mm a":GMT+0530  }}</span></div>
+                <div *ngIf="examDetails.candidateData && examDetails.candidateData.contact" class="col-md-12">Contact No: {{examDetails.candidateData.contact}}</div>
+                <div *ngIf="examDetails.candidateData" class="col-md-6">Exam Score: {{examDetails.candidateData.score}}</div>
                 <div class="col-md-6 text-right">Question(s) Attempted: 10</div>
-                <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData[0].totalQuestions}}</div>
+                <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.testData.totalQuestions}}</div>
               <!-- display table for listing questions -->
               <div class="col-md-12">
                 <table class="table table-striped list_table" border="1">
@@ -25,8 +25,8 @@
                     <th>Candidate Answer</th>
                     <th>Correct Answer</th>
                   </tr>
-                  <tr *ngFor="let quiz of examDetails.examStat| paginate: { itemsPerPage: 10, currentPage: p }">
-                      <td>{{quiz.question.q_text}}</td>
+                  <tr *ngFor="let quiz of examDetails.candidateData.testData| paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td>{{quiz.question.question.text}}</td>
                       <td>{{quiz.question.options[quiz.question.answer].value}}</td>
                       <td><span *ngFor="let option of quiz.question.options">{{ option.isCorrect === true ? option.value : ""}}</span> </td>
                     </tr>

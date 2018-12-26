@@ -31,8 +31,8 @@ export class QuestionListComponent implements OnInit {
   goto_add_question() {
     this.router.navigate(['./create-question']);
   }
-  goToExamDetail(candidateId){
-    this.router.navigate(['./exam-details', candidateId]);
+  goToExamDetail(testId){
+    this.router.navigate(['./exam-details', testId]);
   }
   get_questions() {
     this.http.get('http://localhost:4000/questionRoute/questions').subscribe(data => {
