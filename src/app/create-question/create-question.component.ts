@@ -30,7 +30,8 @@ export class CreateQuestionComponent implements OnInit {
     scrollBeyondLastLine: false, 
     minimap: {
       enabled: 'false'
-    }
+    },
+    autoIndent: 'true'
   };
 
   

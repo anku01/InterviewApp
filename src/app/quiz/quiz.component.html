@@ -15,7 +15,7 @@
                             <div class="question">
                                 <p class="code-section">
                                     {{q.question.text}} </p>
-                                <ngx-monaco-editor name="code" [ngClass]="{'hidden': !q.question.hasCode}" [options]="editorOption" class="form-control" [(ngModel)]="q.question.code"></ngx-monaco-editor>
+                                <ngx-monaco-editor name="code" [ngClass]="{'hidden': !q.question.hasCode}" [options]="editorOption" (onInit)="onEditorInit($event)" class="form-control" [(ngModel)]="q.question.code"></ngx-monaco-editor>
                             </div>
 
                             <div class="answer ">
