@@ -20,7 +20,17 @@ export class QuizComponent implements OnInit {
   questions: any = [];
   activeQuestion:any = [];
   activeQuestionNumber: number = 1;
-
+  editorOption = {
+    language: 'javascript', 
+    readOnly: 'true', 
+    lineNumbers:'off', 
+    automaticLayout: true,
+    scrollBeyondLastLine: false, 
+    minimap: {
+      enabled: 'false'
+    }
+  };
+    
 
   goto_quiz() {
     // this.router.navigate(['./quiz']);
@@ -38,6 +48,12 @@ export class QuizComponent implements OnInit {
     // this.router.navigate(['./quiz-result']);
   }
   ngOnInit() {
+    window.addEventListener("beforeunload", function (e) {
+      var confirmationMessage = "\o/";
+      console.log("cond");
+      e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
+      return confirmationMessage; // Gecko, WebKit, Chrome <34
+    });
     this.startExam();
     // Update the count down every 1 second
     var interval = setInterval(() => {

@@ -1,6 +1,6 @@
 <div class="container Question-wrapper">
   <h3>{{id ? "Edit " : "Add "}} Question</h3>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="f.form.valid &&  onSubmit()" #f="ngForm" novalidate>
     <div class=" form-group">
       <label for="name">Type of Question:</label>
       <div class=selection_type>
@@ -18,9 +18,17 @@
     <div class="row">
       <div class="col-sm-12 form-group">
         <label for="name">Question:</label><br>
-        <textarea rows="4" class="form-control" name="q_text" [(ngModel)]="questionFormData.q_text" cols="100"
-          placeholder="Type your Question">
-            </textarea>
+        <textarea rows="4" class="form-control" name="q_text" [ngClass]="{ 'is-invalid': f.submitted && q_text.invalid }" #q_text="ngModel" [(ngModel)]="questionFormData.question.text" cols="100"
+          placeholder="Type your Question" required>
+          
+        </textarea>
+        <span class="invalid-feedback" *ngIf="f.submitted && q_text.invalid">Question is required.</span>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="isCode" [(ngModel)]="questionFormData.question.hasCode" [checked]="questionFormData.question.hasCode"> Question has code
+          </label>
+        </div>
+        <ngx-monaco-editor [ngClass]="{'hidden': !questionFormData.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="questionFormData.question.code"></ngx-monaco-editor>
         <!-- <div class="invalid-feedback" *ngIf="submitted && formControls.q_text.errors">This Field is required</div> -->
 
       </div>
@@ -29,7 +37,7 @@
 
       <div class=" col-sm-4 form-group">
         <label for="name">Severity:</label><br>
-        <select class="form-control" name="severity" [(ngModel)]='questionFormData.severity'>
+        <select class="form-control" name="severity" #severity="ngModel" [(ngModel)]='questionFormData.severity' [ngClass]="{ 'is-invalid': f.submitted && severity.invalid }" required>
           <option value="1">1 </option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -37,29 +45,30 @@
           <option value="5">5</option>
 
         </select>
-
+        <span class="invalid-feedback" *ngIf="f.submitted && severity.invalid">Severity is required.</span>
         <!-- <div class="invalid-feedback" *ngIf="submitted && selected_sev">This Field is required</div> -->
       </div>
       <div class=" col-sm-4 form-group">
         <label for="name">Technology:</label>
-        <select class="form-control" name="technology" [(ngModel)]='questionFormData.technology'>
+        <select class="form-control" name="technology" #technology="ngModel" [(ngModel)]='questionFormData.technology' [ngClass]="{ 'is-invalid': f.submitted && technology.invalid }" required>
           <option value="FrontEnd">FrontEnd </option>
           <option value="Backend">Backend</option>
           <option value="Embeded">Embeded</option>
 
         </select>
 
-        <!-- <div class="invalid-feedback" *ngIf="submitted && selected_tech">This Field is required{{selected_tech}}</div> -->
+        <div class="invalid-feedback" *ngIf="f.submitted && technology.invalid">Technology is required</div>
 
       </div>
     </div>
     <div class="row" *ngFor="let option of questionFormData.options; let i= index">
       <div class="col-sm-8 form-group">
         <label for="name">Option {{i+1}}:</label>
-        <input type="text" name="{{i}}" [(ngModel)]="option.value" class="form-control">        
+        <input type="text" name="{{i}}" #{{i}}="ngModel" [ngClass]="{ 'is-invalid': f.submitted && i.invalid }" required [(ngModel)]="option.value" class="form-control">        
+        <div class="invalid-feedback" *ngIf="f.submitted && option.value.length ==0">Option can not be Empty</div>
       </div>
       <div class="col-sm-4">
-        <label *ngIf="i===0" for="name">Correct Option(s)</label>
+        <label *ngIf="i===0" for="name">Correct Option</label>
         <input type="checkbox" name="isCorrecet{{i}}" [(ngModel)]="option.isCorrect" class="correct-check">
       </div>
     </div>
