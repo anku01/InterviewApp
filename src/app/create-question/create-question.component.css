@@ -11,3 +11,6 @@
     margin-top: 30px;
 }
 .action-option{ margin-left:15px;}
+.form-control.ng-touched.ng-invalid{
+    border: 1px solid red;
+}
