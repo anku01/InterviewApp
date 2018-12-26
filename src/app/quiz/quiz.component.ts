@@ -28,7 +28,8 @@ export class QuizComponent implements OnInit {
     scrollBeyondLastLine: false, 
     minimap: {
       enabled: 'false'
-    }
+    },
+    contextmenu: 'false'
   };
     
 

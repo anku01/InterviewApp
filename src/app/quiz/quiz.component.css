@@ -67,13 +67,6 @@ pre {
     overflow-y: auto;
     overflow-x: hidden;
 }
-<<<<<<< HEAD
-.code-section-options{
-    display: inline;
-}
-label {
-    font-weight: 400;
-=======
 
 .footerMainContainer {
     position: absolute;
@@ -82,5 +75,8 @@ label {
 
 .row.userDetailbox {
     text-align: center;
->>>>>>> dd0d93d31a03efdca89c4ad3482d97fb917ed8dd
+}
+
+label {
+    font-weight: 400;
 }
