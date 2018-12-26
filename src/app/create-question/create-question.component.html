@@ -68,7 +68,7 @@
         <div class="invalid-feedback" *ngIf="f.submitted && option.value.length ==0">Option can not be Empty</div>
       </div>
       <div class="col-sm-4">
-        <label *ngIf="i===0" for="name">Correct Option(s)</label>
+        <label *ngIf="i===0" for="name">Correct Option</label>
         <input type="checkbox" name="isCorrecet{{i}}" [(ngModel)]="option.isCorrect" class="correct-check">
       </div>
     </div>

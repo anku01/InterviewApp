@@ -10,7 +10,7 @@ import {FormControl, FormGroup, Validators, FormArray, FormsModule} from '@angul
 })
 export class CreateQuestionComponent implements OnInit {
   questionFormData:any = {
-    options: [{0: "0", value: "", isCorrect: false},{1: "1", value: "", isCorrect: false},{2: "2", value: "", isCorrect: false},{3: "3", value: "", isCorrect: false}],
+    options: [{0: "0", value: "", isCorrect: false},{1: "1", value: "", isCorrect: false}],
     q_type: "",
     question: {
       text: "",
