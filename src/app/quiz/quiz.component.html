@@ -1,31 +1,35 @@
 <div class="container-fluid timer">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="title_heading">Online Test Series</h3>
+            <h3 class="title_heading"> <img src="/assets/img/GSPANN_logo.png" alt=""> Online Test</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-10">
             <div class="Question-wrapper">
-                <div class="questionTitle"># Question {{activeQuestionNumber}}</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="questionTitle"># Question {{activeQuestionNumber}}</div>
 
-                <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
-                    <div class="question">
-                        <pre class="code-section"><span>{{activeQuestionNumber}}. </span>{{q.question.text}} </pre>
-                        <ngx-monaco-editor name="code" [ngClass]="{'hidden': !q.question.hasCode}" [options]="editorOption" class="form-control" [(ngModel)]="q.question.code"></ngx-monaco-editor>
-                    </div>
+                        <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
+                            <div class="question">
+                                <p class="code-section">
+                                    {{q.question.text}} </p>
+                                <ngx-monaco-editor name="code" [ngClass]="{'hidden': !q.question.hasCode}" [options]="editorOption" class="form-control" [(ngModel)]="q.question.code"></ngx-monaco-editor>
+                            </div>
 
-                    <div class="answer row ">
-                        <ul class="col-md-12 option_list">
-                            <li *ngFor="let option of q.options; let idx = index;">
-                                <input type="radio" *ngIf="option.value" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" id="{{idx}}" (click)="getAnswer(q, i, idx)">
-                                <label *ngIf="option.value" for="{{idx}}" class="code-section code-section-options">{{option.value}}</label>
-                                <!-- <pre appBlockCopyPaste class="code-section code-section-options">{{option.value}}</pre> -->
-                            </li>
-                        </ul>
+                            <div class="answer ">
+                                <ul class="option_list">
+                                    <li *ngFor="let option of q.options; let idx = index;">
+                                        <input type="radio" *ngIf="option.value" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" id="{{idx}}" (click)="getAnswer(q, i, idx)">
+                                        <label *ngIf="option.value" for="{{idx}}" class="code-section code-section-options">{{option.value}}</label>
+                                        <!-- <pre appBlockCopyPaste class="code-section code-section-options">{{option.value}}</pre> -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12 footerMainContainer">
                         <div class="footerButtonContainer">
@@ -41,7 +45,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col-md-2">
             <div class="row userDetailbox">
@@ -52,8 +55,8 @@
                     <img src="/assets/img/user.png" alt="" srcset="">
                 </div>
                 <div class="DetailBox">
-                    <p>User Name <b>ManishBand</b></p>
-                    <p>Time Remaining <b>{{minutes}}:{{seconds}}</b></p>
+                    <p>{{email}}</p>
+                    <p> <b> Time {{minutes|number:'2.0'}}:{{seconds|number:'2.0'}}</b></p>
                 </div>
 
             </div>
