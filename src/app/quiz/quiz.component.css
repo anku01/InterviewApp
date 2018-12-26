@@ -17,3 +17,6 @@ ul.option_list{padding-left:10px;min-height: 50px !important;}
 .code-section-options{
     display: inline;
 }
+label {
+    font-weight: 400;
+}
