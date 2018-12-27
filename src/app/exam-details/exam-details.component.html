@@ -12,11 +12,11 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
             <div class="row quizStats">
-                <div *ngIf="examDetails.candidateData" class="col-md-12">Candidate Email: {{examDetails.candidateData.email}}<span class="pull-right">Exam Date: {{examDetails.candidateData.submitedOn|date:"dd/mm/yyyy, h:mm a":GMT+0530  }}</span></div>
+                <div *ngIf="examDetails.candidateData" class="col-md-12">Candidate Email: {{examDetails.candidateData.email}}<span class="pull-right">Exam Date: {{examDetails.candidateData.submitedOn|date:'dd MMM yyyy hh:mm a'  }}</span></div>
                 <div *ngIf="examDetails.candidateData && examDetails.candidateData.contact" class="col-md-12">Contact No: {{examDetails.candidateData.contact}}</div>
                 <div *ngIf="examDetails.candidateData" class="col-md-6">Exam Score: {{examDetails.candidateData.score}}</div>
-                <div class="col-md-6 text-right">Question(s) Attempted: 10</div>
-                <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.testData.totalQuestions}}</div>
+                <div class="col-md-6 text-right">Question(s) Attempted: {{examDetails.candidateData.testData.length}}</div>
+                <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.testData.totalQuestions || 15}}</div>
               <!-- display table for listing questions -->
               <div class="col-md-12">
                 <table class="table table-striped list_table" border="1">

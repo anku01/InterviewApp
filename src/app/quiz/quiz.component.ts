@@ -40,7 +40,8 @@ export class QuizComponent implements OnInit {
   goto_quiz_result() {
     let examData = {
       exam: JSON.parse(sessionStorage.getItem("exam")),
-      candidateData: JSON.parse(sessionStorage.getItem("candidateData"))
+      candidateData: JSON.parse(sessionStorage.getItem("candidateData")),
+      totalNoOfQuestions: sessionStorage.getItem("TestDuration") || 15
     };
     this.http.post('http://localhost:4000/quizRoute/submitExam', examData).subscribe((resp: any) => {
       sessionStorage.setItem("examResult", JSON.stringify(resp));
