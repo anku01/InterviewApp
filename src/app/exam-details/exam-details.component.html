@@ -56,10 +56,12 @@
             <div class="DetailBox">
               <p>Hello Admin</p>
             </div>
-            <a [routerLink]="['/admin']" class="btn btn-primary">
-              Logout
-            </a>              
-        </div>
+            <a [routerLink]="['/admin']">
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+              </button>
+            </a>               
+        </div>  
       </div>
     </div>
 </div>

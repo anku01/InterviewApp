@@ -1,7 +1,6 @@
 .add_question{margin:10px 0;}
 .table-striped>tbody>tr:nth-of-type(odd){background-color:#e4f0f5}
 .action{text-align:center}
-table{border:1px solid #3d7e9a;}
 .nav-tabs { border-bottom: 2px solid #DDD; }
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
     .nav-tabs > li > a { border: none; color: #666; }

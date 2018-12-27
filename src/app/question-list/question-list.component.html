@@ -16,66 +16,69 @@
 
       <!-- Tab panes -->
       <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home">
-              <div class="">
-    
-                  <button type="button" style="float:right" class="btn btn-default btn-success submit_btn" (click)="goto_home()"><span
-                      class="glyphicon glyphicon-home"></span></button>
-                  <button class="add_question btn btn-success" (click)="goto_add_question()">Add New Question</button>
-                  <!-- display table for listing questions -->
-                  <table class="table table-striped list_table" border="1">
-                    <thead>
-                      <tr>
-                        <th width="70%">Question</th>
-                        <th>Severity</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let question of questions | paginate: { itemsPerPage: 20, currentPage: p }">
-                        <td width="70%">{{question.question.text}}
-                          <pre [ngClass]="{'hidden': !question.question.hasCode}">{{question.question.code}}</pre>
-                          <!-- <ngx-monaco-editor [ngClass]="{'hidden': !question.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="question.question.code"></ngx-monaco-editor> -->
-                        </td>
-                        <td>{{question.severity}}</td>
-                        <td class="action">
-                          <button class="btn btn-success" (click)="edit_question(question._id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                          <button class="btn btn-success" (click)="remove_item(question)"><span class="glyphicon glyphicon-trash"></span></button>
-                        </td>
-                        <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
-                              </td> -->
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-12 text-right">
-                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </div>  
-          </div>
-          <div role="tabpanel" class="tab-pane" id="profile">
-              <table class="table table-striped list_table" border="1">
-                  <thead>
-                    <tr>
-                      <th width="70%">Email</th>
-                      <th>Contact</th>
-                      <th>score</th>
-                      <th>Date</th>
-                      <th>Details</th>
-                    </tr>
-                  </thead>
-                  <tbody >
-                    <tr *ngFor="let result of resultData">
-                      <td width="70%">{{result.email}}</td>
-                      <td>{{result.contact}}</td>
-                      <td>{{result.score}}/{{result.totalQuestions}}</td>
-                      <td>{{result.submitedOn | date:"medium"}}</td>
-                      <td class="text-center action"><button (click)=goToExamDetail(result._id) title="View in  Detail" class="btn btn-success glyphicon glyphicon-eye-open"></button></td>
-                      <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
-                            </td> -->
-                    </tr>
-                  </tbody>
-                </table>  
-          </div>
+        <div role="tabpanel" class="tab-pane active" id="home">
+          <div class="">
+              <button type="button" style="float:right" class="btn btn-default btn-default submit_btn" (click)="goto_home()"><span
+                  class="glyphicon glyphicon-home"></span></button>
+              <button class="add_question btn btn-success" (click)="goto_add_question()">Add New Question</button>
+              <!-- display table for listing questions -->
+              <table class="table table-bordered table-responsive">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Question</th>
+                    <th>Severity</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let question of questions | paginate: { itemsPerPage: 20, currentPage: p }">
+                    <td>{{question.question.text}}
+                      <pre [ngClass]="{'hidden': !question.question.hasCode}">{{question.question.code}}</pre>
+                      <!-- <ngx-monaco-editor [ngClass]="{'hidden': !question.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="question.question.code"></ngx-monaco-editor> -->
+                    </td>
+                    <td>{{question.severity}}</td>
+                    <td class="action">
+                        <button type="button" class="btn btn-default btn-sm" (click)="edit_question(question._id)">
+                          <span class="glyphicon glyphicon-edit"></span> Edit
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" (click)="remove_item(question)">
+                          <span class="glyphicon glyphicon-trash"></span> Delete 
+                        </button>
+                    </td>
+                    <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
+                          </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-12 text-right">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>  
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>score</th>
+                    <th>Date</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let result of resultData">
+                    <td>{{result.email}}</td>
+                    <td>{{result.contact}}</td>
+                    <td>{{result.score}}/{{result.totalQuestions}}</td>
+                    <td>{{result.submitedOn | date:"medium"}}</td>
+                    <td class="text-center action"><button (click)=goToExamDetail(result._id) title="View in  Detail" class="btn btn-default btn-sm glyphicon glyphicon-eye-open"></button></td>
+                    <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
+                          </td> -->
+                  </tr>
+                </tbody>
+              </table>  
+        </div>
           <!-- <div role="tabpanel" class="tab-pane" id="messages">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
           <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div> -->
       </div>
@@ -89,8 +92,10 @@
             <div class="DetailBox">
               <p>Hello Admin</p>
             </div>
-            <a [routerLink]="['/admin']" class="btn btn-primary">
-              Logout
+            <a [routerLink]="['/admin']">
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+              </button>
             </a>              
         </div>
     </div>
