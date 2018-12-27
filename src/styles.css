@@ -48,3 +48,17 @@ button[disabled],
 html input[disabled] {
     cursor: no-drop;
 }
+
+.title_heading {
+    background: #6fbbfa;
+    background: linear-gradient(90deg, #70d467 0, #6fbbfa);
+    padding: 8px 15px;
+    margin: 0px -15px 10px -15px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.title_heading img {
+    height: 50px;
+    display: inline-block;
+}

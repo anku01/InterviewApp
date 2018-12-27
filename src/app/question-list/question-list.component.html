@@ -1,6 +1,12 @@
-<div class="container">
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-12">
+          <h3 class="title_heading"> <img src="/assets/img/GSPANN_logo.png" alt=""> Online Test</h3>
+      </div>
+  </div>
+  <div class="">
     <div class="row">
-        <div class="col-md-12">
+      <div class="col-md-10">
         <!-- Nav tabs --><div class="card">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">All Questions</a></li>
@@ -75,10 +81,20 @@
             <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div> -->
         </div>
 </div>
+      </div>
+      <div class="col-md-2">
+          <div class="userDetailbox text-center">
+             <div class="imgbox">
+                <img src="/assets/img/user.png" alt="" srcset="">
+              </div>
+              <div class="DetailBox">
+                <p>Hello Admin</p>
+              </div>
+              <a [routerLink]="['/admin']" class="btn btn-primary">
+                Logout
+              </a>              
+          </div>
+      </div>
     </div>
-</div>
-  <div class="row">
-    
   </div>
-
 </div>
