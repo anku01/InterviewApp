@@ -60,6 +60,12 @@ export class QuestionListComponent implements OnInit {
     });
   }
 
+  removeExamDetail(aResult){
+    this.http.post('http://localhost:4000/exam/delete', {examId: aResult._id}).subscribe(data => {
+      this.resultData.splice(this.resultData.indexOf(aResult), 1);
+    });
+  }
+
   
   ngOnInit() {
     this.get_questions();
