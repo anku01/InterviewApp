@@ -73,12 +73,11 @@
         <input type="checkbox" name="isCorrecet{{i}}" [(ngModel)]="option.isCorrect" class="correct-check">
       </div>
       <div class="col-sm-2 remove-option">
-          <button *ngIf="isLast" (click)="removeInputField()" class="btn btn-success" title="Remove Option"> <span class="glyphicon glyphicon-trash"></span> </button>       
+          <button *ngIf="isLast" (click)="removeInputField()" class="btn btn-default" title="Remove Option"> <span class="glyphicon glyphicon-trash"></span> </button>       
       </div>
     </div>
     <div class="row">
-      
-      <button title="Add Option" (click)="addInputField()" type="button" class="btn btn-success action-option"><span class="glyphicon glyphicon-plus"></span></button>
+      <button title="Add Option" (click)="addInputField()" type="button" class="btn btn-default action-option"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
     <div class="row text-right">
       <button type="submit" class="btn btn-success">{{id ? "Update " : "Save "}} Question</button>
