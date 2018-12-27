@@ -72,7 +72,14 @@
                     <td>{{result.contact}}</td>
                     <td>{{result.score}}/{{result.totalQuestions}}</td>
                     <td>{{result.submitedOn | date:"medium"}}</td>
-                    <td class="text-center action"><button (click)=goToExamDetail(result._id) title="View in  Detail" class="btn btn-default btn-sm glyphicon glyphicon-eye-open"></button></td>
+                    <td class="action">
+                        <button type="button" class="btn btn-default btn-sm" (click)=goToExamDetail(result._id)>
+                          <span class="glyphicon glyphicon-eye-open"></span> Detail
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" (click)="removeExamDetail(result)">
+                          <span class="glyphicon glyphicon-trash"></span> Delete 
+                        </button>
+                    </td>
                     <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
                           </td> -->
                   </tr>
