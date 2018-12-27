@@ -62,6 +62,7 @@
                         <th>score</th>
                         <th>Date</th>
                         <th>Details</th>
+                        <th>Remove</th>
                       </tr>
                     </thead>
                     <tbody >
@@ -71,6 +72,7 @@
                         <td>{{result.score}}/{{result.totalQuestions}}</td>
                         <td>{{result.submitedOn | date:"medium"}}</td>
                         <td class="text-center action"><button (click)=goToExamDetail(result._id) title="View in  Detail" class="btn btn-success glyphicon glyphicon-eye-open"></button></td>
+                        <td class="text-center action"><button (click)=removeExamDetail(result) title="Delete" class="btn btn-success glyphicon glyphicon-trash"></button></td>
                         <!-- <td class="action"><span class="glyphicon glyphicon-pencil"></span> <span class="glyphicon glyphicon-trash"></span>
                               </td> -->
                       </tr>
