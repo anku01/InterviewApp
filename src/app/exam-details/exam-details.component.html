@@ -1,47 +1,65 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <!-- Nav tabs -->
-      <div class="card">
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Exam
-              Details</a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home">
-            <div class="row quizStats">
-                <div *ngIf="examDetails.candidateData" class="col-md-12">Candidate Email: {{examDetails.candidateData.email}}<span class="pull-right">Exam Date: {{examDetails.candidateData.submitedOn|date:'dd MMM yyyy hh:mm a'  }}</span></div>
-                <div *ngIf="examDetails.candidateData && examDetails.candidateData.contact" class="col-md-12">Contact No: {{examDetails.candidateData.contact}}</div>
-                <div *ngIf="examDetails.candidateData" class="col-md-6">Exam Score: {{examDetails.candidateData.score}}</div>
-                <div class="col-md-6 text-right">Question(s) Attempted: {{examDetails.candidateData.testData.length}}</div>
-                <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.testData.totalQuestions || 15}}</div>
-              <!-- display table for listing questions -->
-              <div class="col-md-12">
-                <table class="table table-striped list_table" border="1">
-                  <tr>
-                    <th>Question</th>
-                    <th>Candidate Answer</th>
-                    <th>Correct Answer</th>
-                  </tr>
-                  <tr *ngFor="let quiz of examDetails.candidateData.testData| paginate: { itemsPerPage: 10, currentPage: p }">
-                      <td>{{quiz.question.question.text}}</td>
-                      <td>{{quiz.question.options[quiz.question.answer].value}}</td>
-                      <td><span *ngFor="let option of quiz.question.options">{{ option.isCorrect === true ? option.value : ""}}</span> </td>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title_heading"> <img src="/assets/img/GSPANN_logo.png" alt=""> Online Test</h3>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <!-- Nav tabs -->
+        <div class="card">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Exam
+                Details</a></li>
+          </ul>
+  
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+              <div class="row quizStats">
+                  <div *ngIf="examDetails.candidateData" class="col-md-12">Candidate Email: {{examDetails.candidateData.email}}<span class="pull-right">Exam Date: {{examDetails.candidateData.submitedOn|date:'dd MMM yyyy hh:mm a'  }}</span></div>
+                  <div *ngIf="examDetails.candidateData && examDetails.candidateData.contact" class="col-md-12">Contact No: {{examDetails.candidateData.contact}}</div>
+                  <div *ngIf="examDetails.candidateData" class="col-md-6">Exam Score: {{examDetails.candidateData.score}}</div>
+                  <div class="col-md-6 text-right">Question(s) Attempted: {{examDetails.candidateData.testData.length}}</div>
+                  <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.testData.totalQuestions || 15}}</div>
+                <!-- display table for listing questions -->
+                <div class="col-md-12">
+                  <table class="table table-striped list_table" border="1">
+                    <tr>
+                      <th>Question</th>
+                      <th>Candidate Answer</th>
+                      <th>Correct Answer</th>
                     </tr>
-                </table>
+                    <tr *ngFor="let quiz of examDetails.candidateData.testData| paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td>{{quiz.question.question.text}}</td>
+                        <td>{{quiz.question.options[quiz.question.answer].value}}</td>
+                        <td><span *ngFor="let option of quiz.question.options">{{ option.isCorrect === true ? option.value : ""}}</span> </td>
+                      </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-12 text-right">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
               </div>
             </div>
-            <div class="col-md-12 text-right">
-              <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
+  
+            <!-- <div role="tabpanel" class="tab-pane" id="messages">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+            <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div> -->
           </div>
-
-          <!-- <div role="tabpanel" class="tab-pane" id="messages">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
-          <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div> -->
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="userDetailbox text-center">
+            <div class="imgbox">
+              <img src="/assets/img/user.png" alt="" srcset="">
+            </div>
+            <div class="DetailBox">
+              <p>Hello Admin</p>
+            </div>
+            <a [routerLink]="['/admin']" class="btn btn-primary">
+              Logout
+            </a>              
         </div>
       </div>
     </div>
-  </div>
 </div>
