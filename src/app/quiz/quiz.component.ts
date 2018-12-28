@@ -38,22 +38,23 @@ export class QuizComponent implements OnInit {
 
   }
   goto_quiz_result() {
-    let examData = {
-      exam: JSON.parse(sessionStorage.getItem("exam")),
-      candidateData: JSON.parse(sessionStorage.getItem("candidateData")),
-      totalNoOfQuestions: sessionStorage.getItem("TestDuration") || 15
-    };
-    this.http.post('http://localhost:4000/quizRoute/submitExam', examData).subscribe((resp: any) => {
-      sessionStorage.setItem("examResult", JSON.stringify(resp));
-      this.router.navigate(['./quiz-result']);
-    });
-    // this.router.navigate(['./quiz-result']);
+    this.getPrevQuestion();// to save last answered quiestion
+    setTimeout(() => {
+      let examData = {
+        exam: JSON.parse(sessionStorage.getItem("exam")),
+        candidateData: JSON.parse(sessionStorage.getItem("candidateData")),
+        totalNoOfQuestions: sessionStorage.getItem("TestDuration") || 15
+      };
+      this.http.post('http://localhost:4000/quizRoute/submitExam', examData).subscribe((resp: any) => {
+        sessionStorage.setItem("examResult", JSON.stringify(resp));
+        this.router.navigate(['./quiz-result']);
+      });
+    },500);
   }
   ngOnInit() {
     this.email = (JSON.parse(sessionStorage.getItem("candidateData")).email).split('@')[0];
     window.addEventListener("beforeunload", function (e) {
       var confirmationMessage = "\o/";
-      console.log("cond");
       e.returnValue = confirmationMessage; // Gecko, Trident, Chrome 34+
       return confirmationMessage; // Gecko, WebKit, Chrome <34
     });
