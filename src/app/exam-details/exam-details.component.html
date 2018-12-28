@@ -21,7 +21,7 @@
                   <div *ngIf="examDetails.candidateData && examDetails.candidateData.contact" class="col-md-12">Contact No: {{examDetails.candidateData.contact}}</div>
                   <div *ngIf="examDetails.candidateData" class="col-md-6">Exam Score: {{examDetails.candidateData.score}}</div>
                   <div class="col-md-6 text-right">Question(s) Attempted: {{examDetails.candidateData.testData.length}}</div>
-                  <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.testData.totalQuestions || 15}}</div>
+                  <div *ngIf="examDetails.candidateData" class="col-md-12">Total Questions: {{examDetails.candidateData.totalQuestions || 15}}</div>
                 <!-- display table for listing questions -->
                 <div class="col-md-12">
                   <table class="table table-bordered table-responsive">
@@ -32,7 +32,7 @@
                     </tr>
                     <tr *ngFor="let quiz of examDetails.candidateData.testData| paginate: { itemsPerPage: 10, currentPage: p }">
                         <td>{{quiz.question.question.text}}</td>
-                        <td>{{quiz.question.options[quiz.question.answer].value}}</td>
+                        <td>{{quiz.question.options[quiz.question.answer] ? quiz.question.options[quiz.question.answer].value: ""}}</td>
                         <td><span *ngFor="let option of quiz.question.options">{{ option.isCorrect === true ? option.value : ""}}</span> </td>
                       </tr>
                   </table>

@@ -14,7 +14,12 @@ export class ExamDetailsComponent implements OnInit {
               private http: HttpClient
     ) { }
   id:any = "";
-  examDetails:any = "";
+  examDetails:any = {
+    candidateData:{
+      testData: [],
+      totalQuestions: 15
+    }
+  };
   ngOnInit() {
     if(this.activatedRoute.snapshot.params.examId){
       this.id = this.activatedRoute.snapshot.params.examId;
