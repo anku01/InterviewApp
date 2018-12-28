@@ -21,7 +21,7 @@ export class CreateQuestionComponent implements OnInit {
     selected_tech: "",
   };
   id: string;
-  counter:any = 4;
+  counter:any = 2;
   resp:any = {options: ''};
   editorOption = {
     language: 'javascript', 
@@ -90,9 +90,9 @@ export class CreateQuestionComponent implements OnInit {
       this.questionFormData.options.push({[this.counter]: this.counter, "value": "" });
       this.counter = this.counter + 1;
     }
-    removeInputField(){
+    removeOptionInputField(option){
+      this.questionFormData.options.splice(this.questionFormData.options.indexOf(option), 1);
       this.counter = this.counter - 1;
-      this.questionFormData.options.pop();
     }
 
   

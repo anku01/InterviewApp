@@ -68,7 +68,7 @@
 
       </div>
     </div>
-    <div class="row" *ngFor="let option of questionFormData.options; let i= index; last as isLast;">
+    <div class="row" *ngFor="let option of questionFormData.options; let i= index;">
       <div class="col-sm-8 form-group">
         <label for="name">Option {{i+1}}:</label>
         <input type="text" name="{{i}}" #{{i}}="ngModel" [ngClass]="{ 'is-invalid': f.submitted && i.invalid }" required [(ngModel)]="option.value" class="form-control">
@@ -80,7 +80,7 @@
         <input type="checkbox" name="isCorrecet{{i}}" [(ngModel)]="option.isCorrect" class="correct-check">
       </div>
       <div class="col-sm-2 remove-option">
-          <button *ngIf="isLast" (click)="removeInputField()" class="btn btn-default" title="Remove Option"> <span class="glyphicon glyphicon-trash"></span> </button>       
+          <button *ngIf="questionFormData.options.length > 2" (click)="removeOptionInputField(option)" class="btn btn-default" title="Remove Option"> <span class="glyphicon glyphicon-trash"></span> </button>       
       </div>
     </div>
     <div class="row">

@@ -9,10 +9,4 @@ export class CommonService {
   constructor(private router: Router, private http: HttpClient) { }
 
 
-
- 
-  goto_question_list() {
-    this.router.navigate(['./question-list']);
-  }
-
 }
