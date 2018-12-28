@@ -1,4 +1,11 @@
-<div class="container Question-wrapper">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title_heading"> <img src="/assets/img/GSPANN_logo.png" alt=""> Online Test</h3>
+        </div>
+    </div>
+</div>
+<div class="container-fluid Question-wrapper">
   <h3>{{id ? "Edit " : "Add "}} Question</h3>
   <form (ngSubmit)="f.form.valid &&  onSubmit()" #f="ngForm" novalidate>
     <div class=" form-group">

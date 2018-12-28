@@ -24,9 +24,7 @@ export class ExamDetailsComponent implements OnInit {
     if(this.activatedRoute.snapshot.params.examId){
       this.id = this.activatedRoute.snapshot.params.examId;
       this.http.post('http://localhost:4000/exam/details', {testId: this.id} ).subscribe((resp:any) => {
-        this.examDetails = resp;
-        console.log(this.examDetails)
-        
+        this.examDetails = resp;        
       });
     }
   }
