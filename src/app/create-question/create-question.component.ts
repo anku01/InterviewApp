@@ -15,7 +15,7 @@ export class CreateQuestionComponent implements OnInit {
     question: {
       text: "",
       code: "",
-      hasCode: true
+      hasCode: false
     },
     selected_sev: "",
     selected_tech: "",

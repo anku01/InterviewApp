@@ -14,6 +14,7 @@ export class ExamDetailsComponent implements OnInit {
               private http: HttpClient
     ) { }
   id:any = "";
+  answerCode: string;
   examDetails:any = {
     candidateData:{
       testData: [],
@@ -27,5 +28,9 @@ export class ExamDetailsComponent implements OnInit {
         this.examDetails = resp;        
       });
     }
+  }
+
+  viewAnswerCode(answerCode){
+    this.answerCode = answerCode;
   }
 }

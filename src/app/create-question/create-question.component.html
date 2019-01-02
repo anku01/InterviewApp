@@ -17,6 +17,9 @@
         <label class="radio-inline">
           <input type="radio" [(ngModel)]="questionFormData.q_type" name="q_type" value="multi">Multi Select
         </label>
+        <label class="radio-inline">
+            <input type="radio" [(ngModel)]="questionFormData.q_type" name="q_type" value="coding">Coding Question
+          </label>
         <!-- <label class="radio-inline">
           <input type="radio" [(ngModel)]="questionFormData.q_type" name="q_type" value="boolean">True/False
         </label> -->
@@ -35,8 +38,7 @@
             <input type="checkbox" class="form-check-input" name="isCode" [(ngModel)]="questionFormData.question.hasCode" [checked]="questionFormData.question.hasCode"> Question has code
           </label>
         </div>
-        <ngx-monaco-editor [ngClass]="{'hidden': !questionFormData.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="questionFormData.question.code"></ngx-monaco-editor>
-        <!-- <div class="invalid-feedback" *ngIf="submitted && formControls.q_text.errors">This Field is required</div> -->
+        <ngx-monaco-editor [ngClass]="{'hidden': !questionFormData.question.hasCode}" name="q_code" [options]="editorOption" class="form-control" [(ngModel)]="questionFormData.question.code"></ngx-monaco-editor>        <!-- <div class="invalid-feedback" *ngIf="submitted && formControls.q_text.errors">This Field is required</div> -->
 
       </div>
     </div>
@@ -68,6 +70,7 @@
 
       </div>
     </div>
+  <div *ngIf="questionFormData.q_type!='coding'">
     <div class="row" *ngFor="let option of questionFormData.options; let i= index;">
       <div class="col-sm-8 form-group">
         <label for="name">Option {{i+1}}:</label>
@@ -86,6 +89,8 @@
     <div class="row">
       <button title="Add Option" (click)="addInputField()" type="button" class="btn btn-default action-option"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
+  </div>
+
     <div class="row text-right">
       <button type="submit" class="btn btn-success">{{id ? "Update " : "Save "}} Question</button>
       <button (click)="goto_question_list()" type="button" class="btn btn-default">Cancel</button>

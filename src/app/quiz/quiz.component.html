@@ -14,12 +14,13 @@
                         <div class="quiz" *ngFor="let q of activeQuestion; let  i = index;">
                             <div class="question">
                                 <p class="code-section">
-                                    {{q.question.text}} </p>
-                                <ngx-monaco-editor name="code" [ngClass]="{'hidden': !q.question.hasCode}" [options]="editorOption" (onInit)="onEditorInit($event)" class="form-control" [(ngModel)]="q.question.code"></ngx-monaco-editor>
+                                    {{q.question.text}}</p>
+                                <ngx-monaco-editor name="code" [ngClass]="{'hidden': !q.question.hasCode}" [options]="editorOption" (onInit)="onEditorInit($event)" class="form-control" [ngClass]="{'hidden': !q.question.hasCode}" [(ngModel)]="q.question.code"></ngx-monaco-editor>
+                                <textarea *ngIf="q.q_type==='coding'" name="ansewerCode"  class="form-control" [(ngModel)]="q.ansewerCode"></textarea>
                             </div>
 
-                            <div class="answer ">
-                                <ul class="option_list">
+                            <div *ngIf="q.q_type!=='coding'" class="answer ">
+                                <ul  class="option_list">
                                     <li *ngFor="let option of q.options; let idx = index;">
                                         <input type="radio" *ngIf="option.value" [checked]="idx === q.answer" [value]="q.answer" name="{{q._id}}" id="{{idx}}" (click)="getAnswer(q, i, idx)">
                                         <label *ngIf="option.value" for="{{idx}}" class="code-section code-section-options">{{option.value}}</label>

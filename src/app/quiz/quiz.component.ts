@@ -33,6 +33,7 @@ export class QuizComponent implements OnInit {
   };
 
 
+
   goto_quiz() {
     // this.router.navigate(['./quiz']);
 
@@ -92,6 +93,8 @@ export class QuizComponent implements OnInit {
         });
         this.questions.push(resp.quizs[0]);
         this.activeQuestion = resp.quizs;
+        if(this.activeQuestion[0].q_type === "coding")
+        this.activeQuestion[0].ansewerCode = "";
       }
 
       if (this.noOfQuizs === 15)
@@ -135,6 +138,8 @@ export class QuizComponent implements OnInit {
     if (this.questions[this.activeQuestionNumber] && this.questions[this.activeQuestionNumber]._id) {
       questionId = this.questions[this.activeQuestionNumber]._id;
     }
+    if(this.activeQuestion[0].q_type === "coding")
+    this.activeQuestion[0].ansewerCode = this.questions[this.activeQuestionNumber - 1]['ansewerCode'];
     this.activeQuestion[0].answer = this.questions[this.activeQuestionNumber - 1]['answer'];
     console.log('next button clicked', this.activeQuestion);
 
@@ -192,5 +197,4 @@ export class QuizComponent implements OnInit {
     editor.domElement.parentElement.style.height = contentHeight + 'px';
     editor.layout();
   }
-
 }
