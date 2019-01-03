@@ -13,7 +13,7 @@ export class CandidateComponent implements OnInit {
 
  
 
-  constructor(private router: Router, private commonService: CommonService, private http: HttpClient ) { }
+  constructor(private router: Router, private commonService: CommonService) { }
   
   submitted:boolean;
 
@@ -33,7 +33,7 @@ export class CandidateComponent implements OnInit {
     this.candidateform.loginDate = new Date().toString();
     this.candidateform.candidateIP = localStorage.getItem("userIP");
     // if(this.candidateform.valid){
-    this.http.post('http://localhost:4000/userRoute/candidateLogin', this.candidateform).subscribe(data => {
+    this.commonService.submitCandidateSignUpRequest(this.candidateform).subscribe(data => {
       if(data){
         console.log(data, "candidateformcandidateform");
         sessionStorage.setItem("candidateData", JSON.stringify(data));

@@ -53,7 +53,7 @@ export class CreateQuestionComponent implements OnInit {
         this.questionFormData.id = this.id;
         // this.questionFormData.options = JSON.stringify(this.questionFormData.options);
         let questionFormData = JSON.parse(JSON.stringify(this.questionFormData));
-        this.http.put('http://localhost:4000/questionRoute/question', questionFormData ).subscribe(data => {
+        this.commonService.updateQuestion(questionFormData).subscribe(data => {
           if(data){
             this.router.navigate(['./question-list']);
           }  
@@ -69,7 +69,7 @@ export class CreateQuestionComponent implements OnInit {
         console.log(this.questionFormData, "questionFormDataquestionFormDataquestionFormData");
         let questionFormData = JSON.parse(JSON.stringify(this.questionFormData));
 
-        this.http.post('http://localhost:4000/questionRoute/questions', questionFormData ).subscribe(data => {
+        this.commonService.addQuestion(questionFormData).subscribe(data => {
           if(data){
             this.router.navigate(['./question-list']);
           }  
@@ -100,7 +100,7 @@ ngOnInit() {
 
   if(this.activatedRoute.snapshot.params.id){
     this.id = this.activatedRoute.snapshot.params.id;
-    this.http.post('http://localhost:4000/questionRoute/question', {id: this.id} ).subscribe((resp:any) => {
+    this.commonService.getQuestionById({id: this.id}).subscribe((resp:any) => {
       this.questionFormData = resp;
       this.questionFormData.options = JSON.parse(resp.options);
       // if(this.questionFormData.options)

@@ -1,7 +1,6 @@
+import { CommonService } from './../service/common.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
@@ -11,7 +10,7 @@ import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 })
 export class QuizComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private commonService: CommonService) { }
   email: string = '';
   minutes: number = 0;
   seconds: number = 0;
@@ -46,7 +45,7 @@ export class QuizComponent implements OnInit {
         candidateData: JSON.parse(sessionStorage.getItem("candidateData")),
         totalNoOfQuestions: sessionStorage.getItem("TestDuration") || 15
       };
-      this.http.post('http://localhost:4000/quizRoute/submitExam', examData).subscribe((resp: any) => {
+      this.commonService.submitExam(examData).subscribe((resp: any) => {
         sessionStorage.setItem("examResult", JSON.stringify(resp));
         this.router.navigate(['./quiz-result']);
       });
@@ -85,7 +84,7 @@ export class QuizComponent implements OnInit {
 
   startExam() {
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/startExam', { size: this.noOfQuizs, candidateID: candidateID }).subscribe((resp: any) => {
+    this.commonService.startExam({ size: this.noOfQuizs, candidateID: candidateID }).subscribe((resp: any) => {
       if (resp && resp.quizs) {
         resp.quizs.forEach(q => {
           q.answer = "";
@@ -144,7 +143,7 @@ export class QuizComponent implements OnInit {
     console.log('next button clicked', this.activeQuestion);
 
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
+    this.commonService.getNextQuestion({
       candidateID: candidateID,
       stats: {
         question: this.activeQuestion
@@ -169,7 +168,7 @@ export class QuizComponent implements OnInit {
     this.activeQuestion[0].answer = this.questions[this.activeQuestionNumber - 1]['answer'];
 
     let candidateID = JSON.parse(sessionStorage.getItem("candidateData"))._id;
-    this.http.post('http://localhost:4000/quizRoute/getNextQuestion', {
+    this.commonService.getNextQuestion( {
       candidateID: candidateID,
       stats: {
         question: this.activeQuestion,
